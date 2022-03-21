@@ -16,6 +16,7 @@
         android:layout_marginTop="@dimen/cardview_marginTop">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cv_weather"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/cardview_margin_startEnd"
@@ -35,7 +36,7 @@
                 android:padding="@dimen/cardbiew_content_padding">
 
                 <ImageView
-                    android:id="@+id/iv_main"
+                    android:id="@+id/iv_weather"
                     android:layout_width="@dimen/identification_image_size"
                     android:layout_height="@dimen/identification_image_size"
                     android:layout_marginEnd="@dimen/identification_image_marginEnd"
@@ -48,7 +49,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/tv_main"
+                        android:id="@+id/tv_weather"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="end"
@@ -58,7 +59,7 @@
                         tools:text="Weather"/>
 
                     <TextView
-                        android:id="@+id/tv_main_description"
+                        android:id="@+id/tv_description"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="end"
@@ -73,6 +74,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cv_temperature"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/cardview_margin_startEnd"
@@ -138,6 +140,7 @@
         android:layout_marginTop="@dimen/cardview_marginTop">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cv_min_max"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/cardview_margin_startEnd"
@@ -195,6 +198,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cv_wind"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/cardview_margin_startEnd"
@@ -255,6 +259,7 @@
     </LinearLayout>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cv_other"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/cardview_margin_startEnd"
@@ -296,7 +301,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent"
                         android:gravity="end"
-                        android:id="@+id/tv_name"
+                        android:id="@+id/tv_city"
                         tools:text="Name"
                         android:textStyle="bold"
                         android:textSize="@dimen/label_text_size"

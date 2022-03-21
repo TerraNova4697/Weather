@@ -7,4 +7,9 @@
     <string name="miles_per_hour">miles/hour</string>
     <string name="action_refresh">Refresh</string>
     <string name="meter_per_second">meter per second</string>
+
+    <string name="celsius">°C</string>
+    <string name="percent">%</string>
+    <string name="min_temp">Min.</string>
+    <string name="max_temp">Max.</string>
 </resources>
