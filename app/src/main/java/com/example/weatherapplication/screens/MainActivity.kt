@@ -2,13 +2,16 @@ package com.example.weatherapplication.screens
 
 import android.os.Bundle
 import android.util.Log
-import android.widget.ImageView
-import android.widget.TextView
+import android.view.View
+import android.widget.*
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import com.example.weatherapplication.R
 import com.example.weatherapplication.data.entities.WeatherResponse
 import com.example.weatherapplication.util.ViewModelFactory
 import com.example.weatherapplication.util.toDateString
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Callback
@@ -21,6 +24,8 @@ class MainActivity : BaseActivity() {
     @Inject lateinit var mainViewModelFactory: ViewModelFactory
     private lateinit var mainViewModel: MainViewModel
 
+    private lateinit var svCity: SearchView
+    private lateinit var ibCity: ImageButton
     private lateinit var ivWeather: ImageView
     private lateinit var tvWeather: TextView
     private lateinit var tvDescription: TextView
@@ -39,6 +44,8 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        svCity = findViewById(R.id.sv_city)
+        ibCity = findViewById(R.id.ib_city)
         ivWeather = findViewById(R.id.iv_weather)
         tvWeather = findViewById(R.id.tv_weather)
         tvDescription = findViewById(R.id.tv_description)
@@ -57,6 +64,14 @@ class MainActivity : BaseActivity() {
         mainViewModel.weather.observe(this) {
             setUpUI(it)
         }
+        svCity.setOnSearchClickListener {
+            ibCity.visibility = View.VISIBLE
+        }
+        svCity.setOnCloseListener {
+            ibCity.visibility = View.GONE
+            false
+        }
+        ibCity.setOnClickListener { mainViewModel.onCityInput(svCity.query.toString()) }
     }
 
     private fun setUpUI(weatherData: WeatherResponse) {

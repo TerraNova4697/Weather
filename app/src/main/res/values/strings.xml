@@ -12,4 +12,5 @@
     <string name="percent">%</string>
     <string name="min_temp">Min.</string>
     <string name="max_temp">Max.</string>
+    <string name="city">City</string>
 </resources>
