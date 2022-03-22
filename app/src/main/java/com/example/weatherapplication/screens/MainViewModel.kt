@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.example.weatherapplication.data.Constants
 import com.example.weatherapplication.data.entities.WeatherResponse
+import com.example.weatherapplication.data.prefs.UserPreferencesRepository
 import com.example.weatherapplication.network.WeatherServiceApi
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -14,7 +15,8 @@ import javax.inject.Provider
 
 class MainViewModel @Inject constructor(
     private val weatherServiceApi: WeatherServiceApi,
-    private val savedStateHandle: SavedStateHandle
+    private val savedStateHandle: SavedStateHandle,
+    private val userPreferencesRepository: UserPreferencesRepository
 ) : ViewModel() {
 
     private var _city: MutableLiveData<String> = savedStateHandle.getLiveData("city")
