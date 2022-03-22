@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.preferencesDataStore
 import com.example.weatherapplication.WeatherApplication
-import com.example.weatherapplication.data.UserPreferences
 import com.example.weatherapplication.di.activity.ActivityModule
 
 

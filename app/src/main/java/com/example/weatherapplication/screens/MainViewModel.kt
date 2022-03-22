@@ -6,6 +6,7 @@ import com.example.weatherapplication.data.Constants
 import com.example.weatherapplication.data.entities.WeatherResponse
 import com.example.weatherapplication.data.prefs.UserPreferencesRepository
 import com.example.weatherapplication.network.WeatherServiceApi
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
@@ -19,29 +20,31 @@ class MainViewModel @Inject constructor(
     private val userPreferencesRepository: UserPreferencesRepository
 ) : ViewModel() {
 
-    private var _city: MutableLiveData<String> = savedStateHandle.getLiveData("city")
-    private val city: LiveData<String> = _city
+    private val userPrefsFlow = userPreferencesRepository.userPreferencesFlow
+
+//    private var _city: MutableLiveData<String> = savedStateHandle.getLiveData("city")
+//    private val city: LiveData<String> = _city
 
     private var _weather : MutableLiveData<WeatherResponse> = savedStateHandle.getLiveData("weather")
     val weather: LiveData<WeatherResponse> = _weather
 
     init {
         viewModelScope.launch {
-            if (_city.value.isNullOrEmpty()) {
+            if (userPrefsFlow.first().currentCity.isEmpty()) {
                 setCity()
             }
             getWeather()
         }
     }
 
-    fun onCityInput(newCity: String) {
-        _city.value = newCity
+    fun onCityInput(newCity: String) = viewModelScope.launch {
+        userPreferencesRepository.updateCity(newCity)
         getWeather()
     }
 
     private fun getWeather() = viewModelScope.launch {
 
-        val response = weatherServiceApi.getWeather(city.value!!, Constants.METRIC_UNIT, Constants.APP_ID)
+        val response = weatherServiceApi.getWeather(userPrefsFlow.first().currentCity, Constants.METRIC_UNIT, Constants.APP_ID)
         response.enqueue(object : Callback<WeatherResponse> {
             override fun onResponse(
                 call: Call<WeatherResponse>,
