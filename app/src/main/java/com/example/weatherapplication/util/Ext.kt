@@ -1,7 +1,7 @@
 package com.example.weatherapplication.util
 
 import android.content.Context
-import android.util.Log
+import androidx.appcompat.widget.SearchView
 import androidx.datastore.preferences.preferencesDataStore
 import java.text.SimpleDateFormat
 import java.util.*
@@ -19,9 +19,20 @@ fun Long.toDateString(timex: Long, timezone: Int): String {
     return sdf.format(date)
 }
 
+inline fun SearchView.onQueryTextChanged(crossinline listener: (String) -> Unit) {
+    this.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        override fun onQueryTextSubmit(query: String?): Boolean {
+            return true
+        }
+
+        override fun onQueryTextChange(newText: String?): Boolean {
+            listener(newText.orEmpty())
+            return true
+        }
+    })
+}
 
 private const val USER_PREFERENCES_NAME = "user_preferences"
-
 val Context.dataStore by preferencesDataStore(
     name = USER_PREFERENCES_NAME
 )

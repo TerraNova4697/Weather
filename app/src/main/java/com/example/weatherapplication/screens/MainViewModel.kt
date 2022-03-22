@@ -25,6 +25,8 @@ class MainViewModel @Inject constructor(
 //    private var _city: MutableLiveData<String> = savedStateHandle.getLiveData("city")
 //    private val city: LiveData<String> = _city
 
+    val query = savedStateHandle.getLiveData("searchQuery", "")
+
     private var _weather : MutableLiveData<WeatherResponse> = savedStateHandle.getLiveData("weather")
     val weather: LiveData<WeatherResponse> = _weather
 

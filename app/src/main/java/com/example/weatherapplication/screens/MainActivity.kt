@@ -12,6 +12,7 @@ import com.example.weatherapplication.R
 import com.example.weatherapplication.data.entities.WeatherResponse
 import com.example.weatherapplication.databinding.ActivityMainBinding
 import com.example.weatherapplication.util.ViewModelFactory
+import com.example.weatherapplication.util.onQueryTextChanged
 import com.example.weatherapplication.util.toDateString
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -47,6 +48,9 @@ class MainActivity : BaseActivity() {
             svCity.setOnCloseListener {
                 ibCity.visibility = View.GONE
                 false
+            }
+            svCity.onQueryTextChanged {
+                mainViewModel.query.value = it
             }
             ibCity.setOnClickListener { mainViewModel.onCityInput(svCity.query.toString()) }
         }
