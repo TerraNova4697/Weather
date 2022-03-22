@@ -2,6 +2,8 @@ package com.example.weatherapplication.screens
 
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import androidx.appcompat.widget.SearchView
@@ -99,6 +101,20 @@ class MainActivity : BaseActivity() {
                 }
 
             }
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_activity_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.menu.main_activity_menu -> {
+                mainViewModel.onRefreshClicked()
+                return true
+            }else -> super.onOptionsItemSelected(item)
         }
     }
 }

@@ -43,7 +43,6 @@ class MainViewModel @Inject constructor(
     }
 
     private fun getWeather() = viewModelScope.launch {
-
         val response = weatherServiceApi.getWeather(userPrefsFlow.first().currentCity, Constants.METRIC_UNIT, Constants.APP_ID)
         response.enqueue(object : Callback<WeatherResponse> {
             override fun onResponse(
@@ -60,6 +59,10 @@ class MainViewModel @Inject constructor(
 
     private fun setCity() {
         savedStateHandle.set("city", "berlin")
+    }
+
+    fun onRefreshClicked() {
+        getWeather()
     }
 
 }
